@@ -1,6 +1,6 @@
 # SGQR
 
-A no-compromise boilerplate for projects willing to be on the cutting edge of ECMAScript and Node.
+A beautiful and typesafe zero-dependency cross-platform SGQR library.
 
 ## Commands
 

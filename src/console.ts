@@ -6,14 +6,20 @@ import { GenerateCodeOptions } from './types/generate_option.js'
 
 async function parse_args() {
   const args = await yargs(hideBin(Bun.argv))
+    .option('number', {
+      describe: 'mobile or unique entity number',
+      type: 'string',
+      demandOption: true,
+    })
     .option('amount', {
       describe: 'payment amount as a string',
       type: 'string',
       demandOption: true,
     })
-    .option('expiry_date', {
-      describe: 'expiry date as a string',
+    .option('output', {
+      describe: 'output file path',
       type: 'string',
+      demandOption: true,
     })
     .option('company_name', {
       describe: 'company name',
@@ -25,6 +31,14 @@ async function parse_args() {
     })
     .option('country_code', {
       describe: 'country code',
+      type: 'string',
+    })
+    .option('days_before_expiry', {
+      describe: 'number of days until the expiry date',
+      type: 'number',
+    })
+    .option('expiry_date', {
+      describe: 'expiry date as a string',
       type: 'string',
     })
     .option('merchant_city', {
@@ -39,11 +53,6 @@ async function parse_args() {
       describe: 'if the code is editable',
       type: 'boolean',
     })
-    .option('number', {
-      describe: 'mobile or unique entity number',
-      type: 'string',
-      demandOption: true,
-    })
     .option('number_type', {
       describe: 'UEN or MOBILE',
       type: 'string',
@@ -55,11 +64,6 @@ async function parse_args() {
     .option('type', {
       describe: 'type of image, either webp, jpeg or svg',
       choices: ['image/webp', 'image/jpeg', 'image/svg+xml'],
-    })
-    .option('output', {
-      describe: 'output file path',
-      type: 'string',
-      demandOption: true,
     })
     .help()
     .parse()

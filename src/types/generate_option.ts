@@ -4,6 +4,7 @@ type NumberString = `${number}`
 
 interface DefaultOptions {
   amount: NumberString
+  days_before_expiry?: number
   expiry_date?: NumberString
   company_name?: string
   comments?: string

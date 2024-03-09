@@ -67,10 +67,12 @@ if (!buffer) {
   throw new Error('Failed to generate QR code')
 }
 
-await Bun.write('qr.png', buffer)
+await Bun.write('qr.svg', buffer)
 ```
 
 ### Generate SGQR with UEN
+
+If you are a business, you can generate SGQR codes with your UEN.
 
 ```ts
 import sgqr from 'sgqr'
@@ -92,6 +94,8 @@ await Bun.write('qr.png', buffer)
 
 ### Generate SGQR with Expiry Date
 
+You can specify an expiry date for the SGQR code. According to the SGQR specification, the expiry date must be in the format `YYYYMMDD`.
+
 ```ts
 import sgqr from 'sgqr'
 
@@ -106,12 +110,31 @@ if (!buffer) {
   throw new Error('Failed to generate QR code')
 }
 
-await Bun.write('qr.png', buffer)
+await Bun.write('qr.svg', buffer)
+```
+
+You can also specify the number of days until the expiry date.
+
+```ts
+import sgqr from 'sgqr'
+
+const buffer = await sgqr.generate_svg({
+  number: '0123456789',
+  number_type: 'UEN',
+  amount: '1.00',
+  days_before_expiry: 1
+})
+
+if (!buffer) {
+  throw new Error('Failed to generate QR code')
+}
+
+await Bun.write('qr.svg', buffer)
 ```
 
 ### Command Line
 
-`sgqr` can also be used as a command line tool.
+`sgqr` can also be used as a command line tool. The binary can be found [here](https://github.com/winstxnhdw/sgqr/releases/tag/latest).
 
 ```bash
 sgqr --number +6591234567 --amount 420.69 --type image/svg+xml --output qr.svg
@@ -119,21 +142,22 @@ sgqr --number +6591234567 --amount 420.69 --type image/svg+xml --output qr.svg
 
 ```yml
 Options:
-  --version        Show version number                                  [boolean]
-  --amount         payment amount as a string                           [string] [required]
-  --expiry_date    expiry date as a string                              [string]
-  --company_name   company name                                         [string]
-  --comments       comments                                             [string]
-  --country_code   country code                                         [string]
-  --merchant_city  merchant city                                        [string]
-  --currency_code  currency code                                        [string]
-  --editable       if the code is editable                              [boolean]
-  --number         mobile or unique entity number                       [string] [required]
-  --number_type    UEN or MOBILE                                        [string]
-  --scale          scale of the image                                   [number]
-  --type           type of image, either webp, jpeg or svg              [choices: "image/webp", "image/jpeg", "image/svg+xml"]
-  --output         output file path                                     [string] [required]
-  --help           Show help                                            [boolean]
+  --version             Show version number                             [boolean]
+  --number              mobile or unique entity number                  [string] [required]
+  --amount              payment amount as a string                      [string] [required]
+  --output              output file path                                [string] [required]
+  --company_name        company name                                    [string]
+  --comments            comments                                        [string]
+  --country_code        country code                                    [string]
+  --days_before_expiry  number of days until the expiry date            [number]
+  --expiry_date         expiry date as a string                         [string]
+  --merchant_city       merchant city                                   [string]
+  --currency_code       currency code                                   [string]
+  --editable            if the code is editable                         [boolean]
+  --number_type         UEN or MOBILE                                   [string]
+  --scale               scale of the image                              [number]
+  --type                type of image, either webp, jpeg or svg         [choices: "image/webp", "image/jpeg", "image/svg+xml"]
+  --help                Show help                                       [boolean]
 ```
 
 ## Development

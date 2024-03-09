@@ -45,6 +45,6 @@ jobs:
       release-title: Build
       release-asset: bin/sgqr
       artifact-name: build
-      artifact-path: dist/
+      artifact-path: bin/
     permissions:
       contents: write

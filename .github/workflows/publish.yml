@@ -31,10 +31,10 @@ jobs:
       - name: Install node dependencies
         run: bun install --frozen-lockfile
 
-      - name: Create Release Pull Request or Publish
+      - name: Create release PR or publish
         uses: changesets/action@v1.4.6
         with:
-          publish: bun run release
+          publish: bun run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

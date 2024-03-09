@@ -21,6 +21,10 @@ async function parse_args() {
       type: 'string',
       demandOption: true,
     })
+    .option('number_type', {
+      describe: 'UEN or MOBILE',
+      type: 'string',
+    })
     .option('company_name', {
       describe: 'company name',
       type: 'string',
@@ -32,6 +36,10 @@ async function parse_args() {
     .option('country_code', {
       describe: 'country code',
       type: 'string',
+    })
+    .option('scale', {
+      describe: 'scale of the image',
+      type: 'number',
     })
     .option('days_before_expiry', {
       describe: 'number of days until the expiry date',
@@ -49,21 +57,13 @@ async function parse_args() {
       describe: 'currency code',
       type: 'string',
     })
-    .option('editable', {
-      describe: 'if the code is editable',
-      type: 'boolean',
-    })
-    .option('number_type', {
-      describe: 'UEN or MOBILE',
-      type: 'string',
-    })
-    .option('scale', {
-      describe: 'scale of the image',
-      type: 'number',
-    })
     .option('type', {
       describe: 'type of image, either webp, jpeg or svg',
       choices: ['image/webp', 'image/jpeg', 'image/svg+xml'],
+    })
+    .option('editable', {
+      describe: 'if the code is editable',
+      type: 'boolean',
     })
     .help()
     .parse()

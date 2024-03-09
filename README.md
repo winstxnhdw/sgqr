@@ -54,6 +54,24 @@ await Bun.write('qr.png', buffer)
 sgqr --number +6591234567 --amount 420.69 --output qr.png
 ```
 
+```yml
+Options:
+  --version        Show version number                                  [boolean]
+  --amount         Amount as a string                                   [string] [required]
+  --expiry_date    Expiry date as a string                              [string]
+  --company_name   Company name                                         [string]
+  --comments       Comments                                             [string]
+  --country_code   Country code                                         [string]
+  --merchant_city  Merchant city                                        [string]
+  --currency_code  Currency code                                        [string]
+  --editable       If the code is editable                              [boolean]
+  --number         Number as a string, with leading + for mobile        [string] [required]
+  --number_type    Type of number, either UEN or MOBILE                 [string]
+  --type           Type of image, either webp or jpeg                   [choices: "image/webp", "image/jpeg"]
+  --output         Output file                                          [string] [required]
+  --help           Show help                                            [boolean]
+```
+
 ## Development
 
 ### Setup

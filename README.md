@@ -13,6 +13,14 @@ A typesafe cross-platform SGQR library.
 npm i sgqr
 ```
 
+```bash
+pnpm i sgqr
+```
+
+```bash
+bun add sgqr
+```
+
 ## Usage
 
 ### Generate SGQR

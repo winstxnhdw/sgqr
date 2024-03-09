@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    branches: main
+    paths: .github/workflows/release.yml
+  workflow_run:
+    workflows: CI
+    branches: main
+    types: completed
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1.2.0
+        with:
+          bun-version: latest
+
+      - name: Install node dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Compile
+        run: bun compile
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: build
+          path: dist/sgqr
+
+  release:
+    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    needs: compile
+    uses: winstxnhdw/actions/.github/workflows/release.yml@main
+    with:
+      release-tag: latest
+      release-title: Build
+      release-asset: dist/sgqr
+      artifact-name: build
+      artifact-path: dist/
+    permissions:
+      contents: write

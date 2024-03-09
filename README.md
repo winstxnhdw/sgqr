@@ -1,8 +1,60 @@
-# SGQR
+# sgqr
 
-A beautiful and typesafe zero-dependency cross-platform SGQR library.
+[![main.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/main.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/main.yml)
+[![release.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/release.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/release.yml)
+[![release.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/publish.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/publish.yml)
+[![formatter.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/formatter.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/formatter.yml)
 
-## Commands
+A typesafe cross-platform SGQR library.
+
+## Install
+
+```bash
+npm i sgqr
+```
+
+## Usage
+
+### Generate SGQR
+
+```ts
+import sgqr from 'sgqr'
+
+const code = sgqr.generate({
+  number: '+6591234567',
+  amount: '1.69',
+})
+
+console.log(code)
+```
+
+### Generate SGQR Code
+
+```ts
+import sgqr from 'sgqr'
+
+const buffer = await sgqr.generate_code({
+  number: '+6591234567',
+  amount: '1',
+  type: 'image/webp'
+})
+
+if (!buffer) {
+  throw new Error('Failed to generate QR code')
+}
+
+await Bun.write('qr.png', buffer)
+```
+
+### Command Line
+
+`sgqr` can also be used as a command line tool.
+
+```bash
+sgqr --number +6591234567 --amount 420.69 --output qr.png
+```
+
+## Development
 
 ### Setup
 
@@ -12,24 +64,20 @@ Install all dependencies.
 bun install
 ```
 
-Run your application.
-
-```bash
-bun dev
-```
-
 ### Build
 
-Minify and bundle the Node application with [esbuild](https://esbuild.github.io/).
+Minify and bundle the library with [tsup](https://github.com/egoist/tsup).
 
 ```bash
 bun run build
 ```
 
-Human-readable bundle of your Node application. For debugging purposes.
+### Compile
+
+Compile the library into a binary.
 
 ```bash
-bun run build -t
+bun compile
 ```
 
 ### Test

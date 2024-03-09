@@ -1,21 +1,32 @@
 {
+  "name": "sgqr",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "module": "dist/index.cjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "lint": "eslint .",
     "dev": "bun src/index.ts",
-    "build": "bun scripts/build.ts",
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify",
+    "compile": "bun build src/console.ts --outfile dist/sgqr --compile",
     "test": "bun test --watch"
   },
   "dependencies": {
-    "tslib": "^2.6.2"
+    "qrcode": "^1.5.3",
+    "tslib": "^2.6.2",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@types/qrcode": "^1.5.5",
+    "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "bun-types": "^1.0.25",
-    "esbuild": "^0.20.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.4",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   }
 }

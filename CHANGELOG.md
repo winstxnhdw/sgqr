@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.3.0
+
+### Minor Changes
+
+- ace8329: Allow users to set the number of days till expiry
+
 ## 0.2.0
 
 ### Minor Changes

@@ -17,18 +17,22 @@ npm i sgqr
 
 ### Generate SGQR
 
+Minimally, `sgqr` allows you to generate the SGQR text.
+
 ```ts
 import sgqr from 'sgqr'
 
 const code = sgqr.generate({
   number: '+6591234567',
-  amount: '1.69',
+  amount: '1.69'
 })
 
 console.log(code)
 ```
 
 ### Generate SGQR Code
+
+`sgqr` has a built-in cross-platform QR code generator. It can generate QR codes in either `webp`, `jpeg` or `png` format.
 
 ```ts
 import sgqr from 'sgqr'
@@ -46,29 +50,89 @@ if (!buffer) {
 await Bun.write('qr.png', buffer)
 ```
 
+### Generate SGQR SVG
+
+Obviously, `sgqr` can also generate SVGs.
+
+```ts
+import sgqr from 'sgqr'
+
+const buffer = await sgqr.generate_svg({
+  number: '+6591234567',
+  amount: '1',
+  comments: 'This SGQR was made with sgqr!'
+})
+
+if (!buffer) {
+  throw new Error('Failed to generate QR code')
+}
+
+await Bun.write('qr.png', buffer)
+```
+
+### Generate SGQR with UEN
+
+```ts
+import sgqr from 'sgqr'
+
+const buffer = await sgqr.generate_code({
+  number: '0123456789',
+  number_type: 'UEN',
+  company_name: 'Singapore Armed Forces',
+  amount: '4',
+  type: 'image/jpeg'
+})
+
+if (!buffer) {
+  throw new Error('Failed to generate QR code')
+}
+
+await Bun.write('qr.png', buffer)
+```
+
+### Generate SGQR with Expiry Date
+
+```ts
+import sgqr from 'sgqr'
+
+const buffer = await sgqr.generate_svg({
+  number: '0123456789',
+  number_type: 'UEN',
+  amount: '1.00',
+  expiry_date: '20251231'
+})
+
+if (!buffer) {
+  throw new Error('Failed to generate QR code')
+}
+
+await Bun.write('qr.png', buffer)
+```
+
 ### Command Line
 
 `sgqr` can also be used as a command line tool.
 
 ```bash
-sgqr --number +6591234567 --amount 420.69 --output qr.png
+sgqr --number +6591234567 --amount 420.69 --type image/svg+xml --output qr.svg
 ```
 
 ```yml
 Options:
   --version        Show version number                                  [boolean]
-  --amount         Amount as a string                                   [string] [required]
-  --expiry_date    Expiry date as a string                              [string]
-  --company_name   Company name                                         [string]
-  --comments       Comments                                             [string]
-  --country_code   Country code                                         [string]
-  --merchant_city  Merchant city                                        [string]
-  --currency_code  Currency code                                        [string]
-  --editable       If the code is editable                              [boolean]
-  --number         Number as a string, with leading + for mobile        [string] [required]
-  --number_type    Type of number, either UEN or MOBILE                 [string]
-  --type           Type of image, either webp or jpeg                   [choices: "image/webp", "image/jpeg"]
-  --output         Output file                                          [string] [required]
+  --amount         payment amount as a string                           [string] [required]
+  --expiry_date    expiry date as a string                              [string]
+  --company_name   company name                                         [string]
+  --comments       comments                                             [string]
+  --country_code   country code                                         [string]
+  --merchant_city  merchant city                                        [string]
+  --currency_code  currency code                                        [string]
+  --editable       if the code is editable                              [boolean]
+  --number         mobile or unique entity number                       [string] [required]
+  --number_type    UEN or MOBILE                                        [string]
+  --scale          scale of the image                                   [number]
+  --type           type of image, either webp, jpeg or svg              [choices: "image/webp", "image/jpeg", "image/svg+xml"]
+  --output         output file path                                     [string] [required]
   --help           Show help                                            [boolean]
 ```
 

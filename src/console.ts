@@ -1,58 +1,63 @@
 import { generate_code } from '@/generate_code'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
+import { generate_svg } from './generate_svg.js'
 import { GenerateCodeOptions } from './types/generate_option.js'
 
 async function parse_args() {
   const args = await yargs(hideBin(Bun.argv))
     .option('amount', {
-      describe: 'Amount as a string',
+      describe: 'payment amount as a string',
       type: 'string',
       demandOption: true,
     })
     .option('expiry_date', {
-      describe: 'Expiry date as a string',
+      describe: 'expiry date as a string',
       type: 'string',
     })
     .option('company_name', {
-      describe: 'Company name',
+      describe: 'company name',
       type: 'string',
     })
     .option('comments', {
-      describe: 'Comments',
+      describe: 'comments',
       type: 'string',
     })
     .option('country_code', {
-      describe: 'Country code',
+      describe: 'country code',
       type: 'string',
     })
     .option('merchant_city', {
-      describe: 'Merchant city',
+      describe: 'merchant city',
       type: 'string',
     })
     .option('currency_code', {
-      describe: 'Currency code',
+      describe: 'currency code',
       type: 'string',
     })
     .option('editable', {
-      describe: 'If the code is editable',
+      describe: 'if the code is editable',
       type: 'boolean',
     })
     .option('number', {
-      describe: 'Number as a string, with leading + for mobile',
+      describe: 'mobile or unique entity number',
       type: 'string',
       demandOption: true,
     })
     .option('number_type', {
-      describe: 'Type of number, either UEN or MOBILE',
+      describe: 'UEN or MOBILE',
       type: 'string',
     })
+    .option('scale', {
+      describe: 'scale of the image',
+      type: 'number',
+    })
     .option('type', {
-      describe: 'Type of image, either webp or jpeg',
-      choices: ['image/webp', 'image/jpeg'],
+      describe: 'type of image, either webp, jpeg or svg',
+      choices: ['image/webp', 'image/jpeg', 'image/svg+xml'],
     })
     .option('output', {
-      describe: 'Output file',
+      describe: 'output file path',
       type: 'string',
       demandOption: true,
     })
@@ -64,7 +69,11 @@ async function parse_args() {
 
 async function main() {
   const options = await parse_args()
-  const buffer = await generate_code(options as GenerateCodeOptions)
+
+  const buffer =
+    options.type === 'image/svg+xml'
+      ? await generate_svg(options as GenerateCodeOptions)
+      : await generate_code(options as GenerateCodeOptions)
 
   if (!buffer) {
     throw new Error('Failed to generate the QR code!')

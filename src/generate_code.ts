@@ -3,6 +3,7 @@ import type { GenerateCodeOptions } from '@/types'
 import { toDataURL } from 'qrcode'
 
 export async function generate_code(options: GenerateCodeOptions): Promise<ArrayBuffer | undefined> {
+  const { type, scale = 100 } = options
   const code = generate(options)
 
   if (!code) {
@@ -10,8 +11,12 @@ export async function generate_code(options: GenerateCodeOptions): Promise<Array
   }
 
   const data_url = await toDataURL(code, {
-    type: options.type,
+    type: type,
     errorCorrectionLevel: 'H',
+    scale: scale,
+    rendererOpts: {
+      quality: 1,
+    },
   })
 
   const base64 = data_url.split(',')[1]

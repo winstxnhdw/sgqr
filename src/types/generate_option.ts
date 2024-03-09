@@ -24,11 +24,13 @@ interface GenerateMobileOptions extends DefaultOptions {
 }
 
 interface GenerateCodeMobileOptions extends GenerateMobileOptions {
-  type?: 'image/webp' | 'image/jpeg'
+  type?: 'image/webp' | 'image/jpeg' | 'image/png'
+  scale?: number
 }
 
 interface GenerateCodeUENOptions extends GenerateUniqueEntityNumberOptions {
-  type?: 'image/webp' | 'image/jpeg'
+  type?: 'image/webp' | 'image/jpeg' | 'image/png'
+  scale?: number
 }
 
 export type GenerateOptions = GenerateUniqueEntityNumberOptions | GenerateMobileOptions

@@ -1,12 +1,13 @@
-import { crc16 } from '@/crc16'
+import { crc16, get_days_from_now } from '@/helpers'
 import type { CodeParameter, GenerateOptions } from '@/types'
 
 export function generate(options: GenerateOptions): string | undefined {
   const {
     number,
     amount,
-    number_type = 'MOBILE',
+    days_before_expiry,
     expiry_date = '20380119',
+    number_type = 'MOBILE',
     company_name = '',
     comments = '',
     country_code = 'SG',
@@ -14,6 +15,8 @@ export function generate(options: GenerateOptions): string | undefined {
     currency_code = '702',
     editable = false,
   } = options
+
+  const date_of_expiry = days_before_expiry ? get_days_from_now(days_before_expiry) : expiry_date
 
   const data: CodeParameter[] = [
     { id: '00', value: '01' },
@@ -25,7 +28,7 @@ export function generate(options: GenerateOptions): string | undefined {
         { id: '01', value: number_type === 'MOBILE' ? '0' : '2' },
         { id: '02', value: number },
         { id: '03', value: editable ? '1' : '0' },
-        { id: '04', value: expiry_date },
+        { id: '04', value: date_of_expiry },
       ],
     },
     { id: '52', value: '0000' },

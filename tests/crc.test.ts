@@ -1,4 +1,4 @@
-import { crc16 } from '@/crc16'
+import { crc16 } from '@/helpers'
 import { expect, test } from 'bun:test'
 
 test('returns the correct CRC-16 value for a given string', () => {

@@ -39,7 +39,7 @@ jobs:
       - name: Create release PR or publish
         uses: changesets/action@v1.4.6
         with:
-          publish: bun run build
+          publish: bun release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -9,7 +9,7 @@ on:
     branches: main
     paths:
       - .github/workflows/publish.yml
-      - .changeset/*.md
+      - .changeset/**
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 

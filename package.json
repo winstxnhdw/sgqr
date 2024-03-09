@@ -1,5 +1,6 @@
 {
   "name": "sgqr",
+  "license": "MIT",
   "version": "0.3.0",
   "main": "dist/index.js",
   "module": "dist/index.cjs",

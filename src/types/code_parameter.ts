@@ -10,7 +10,7 @@ interface CodeParameter26 {
   value: [
     { id: '00'; value: 'SG.PAYNOW' },
     { id: '01'; value: '0' | '2' },
-    { id: '02'; value: NumberString | `+${NumberString}` },
+    { id: '02'; value: NumberString | `+${string}` },
     { id: '03'; value: '0' | '1' },
     { id: '04'; value: NumberString },
   ]

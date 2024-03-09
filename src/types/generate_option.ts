@@ -19,7 +19,7 @@ interface GenerateUniqueEntityNumberOptions extends DefaultOptions {
 }
 
 interface GenerateMobileOptions extends DefaultOptions {
-  number: `+${NumberString}`
+  number: `+${string}`
   number_type?: 'MOBILE'
 }
 

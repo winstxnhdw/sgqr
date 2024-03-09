@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4.3.1
         with:
           name: build
-          path: dist/sgqr
+          path: bin/sgqr
 
   release:
     if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
@@ -43,7 +43,7 @@ jobs:
     with:
       release-tag: latest
       release-title: Build
-      release-asset: dist/sgqr
+      release-asset: bin/sgqr
       artifact-name: build
       artifact-path: dist/
     permissions:

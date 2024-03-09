@@ -4,11 +4,14 @@
   "main": "dist/index.js",
   "module": "dist/index.cjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint .",
     "dev": "bun src/index.ts",
     "build": "tsup src/index.ts --format cjs,esm --dts --minify",
-    "compile": "bun build src/console.ts --outfile dist/sgqr --compile",
+    "compile": "bun build src/console.ts --outfile bin/sgqr --compile",
     "test": "bun test --watch"
   },
   "dependencies": {

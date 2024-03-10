@@ -10,7 +10,7 @@ on:
     types: completed
 
 jobs:
-  compile:
+  compile-linux:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,20 +30,52 @@ jobs:
       - name: Compile
         run: bun compile
 
+      - name: Compress binary
+        run: zip -r bin/sgqr-linux.zip bin/sgqr
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4.3.1
         with:
           name: build
-          path: bin/sgqr
+          path: bin/sgqr-linux.zip
+
+  compile-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1.2.0
+        with:
+          bun-version: latest
+
+      - name: Install node dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Compile
+        run: bun compile
+
+      - name: Compress binary
+        run: Compress-Archive -Path bin/sgqr -DestinationPath bin/sgqr-win.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: build
+          path: bin/sgqr-win.zip
 
   release:
     if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
-    needs: compile
+    needs: [compile-linux, compile-windows]
     uses: winstxnhdw/actions/.github/workflows/release.yml@main
     with:
       release-tag: latest
       release-title: Build
-      release-asset: bin/sgqr
+      release-asset: bin/*
       artifact-name: build
       artifact-path: bin/
     permissions:

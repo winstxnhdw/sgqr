@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.3.1
+
+### Patch Changes
+
+- 0c4766e: `generate_svg` should use normal `GenerateOptions`
+
 ## 0.3.0
 
 ### Minor Changes

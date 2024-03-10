@@ -5,7 +5,7 @@
 [![release.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/publish.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/publish.yml)
 [![formatter.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/formatter.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/formatter.yml)
 
-A typesafe cross-platform SGQR library.
+A typesafe cross-platform [SGQR](https://www.mas.gov.sg/development/e-payments/sgqr) library for individuals and businesses.
 
 ## Install
 
@@ -40,7 +40,7 @@ console.log(code)
 
 ### Generate SGQR Code
 
-`sgqr` has a built-in cross-platform QR code generator. It can generate QR codes in either `webp`, `jpeg` or `png` format.
+`sgqr` provides an API capable of generating QR codes in `webp`, `jpeg` or `png` formats.
 
 ```ts
 import sgqr from 'sgqr'
@@ -60,7 +60,7 @@ await Bun.write('qr.png', buffer)
 
 ### Generate SGQR SVG
 
-Obviously, `sgqr` can also generate SVGs.
+SVGs can be generated with the `generate_svg` API.
 
 ```ts
 import sgqr from 'sgqr'

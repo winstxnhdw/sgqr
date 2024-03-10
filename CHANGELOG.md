@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.4.0
+
+### Minor Changes
+
+- edbe3f3: Use more rigorous types for numbers
+
 ## 0.3.2
 
 ### Patch Changes

@@ -1,8 +1,8 @@
 import { generate_code } from '@/generate_code'
+import { generate_svg } from '@/generate_svg'
+import type { GenerateCodeOptions, GenerateOptions } from '@/types'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { generate_svg } from './generate_svg.js'
-import { GenerateCodeOptions } from './types/generate_option.js'
 
 async function parse_args() {
   const args = await yargs(hideBin(Bun.argv))
@@ -76,7 +76,7 @@ async function main() {
 
   const buffer =
     options.type === 'image/svg+xml'
-      ? await generate_svg(options as GenerateCodeOptions)
+      ? await generate_svg(options as GenerateOptions)
       : await generate_code(options as GenerateCodeOptions)
 
   if (!buffer) {

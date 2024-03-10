@@ -1,4 +1,4 @@
-import type { CountryCode, CurrencyCode, MerchantCity } from '@/types'
+import type { CountryCode, CountryCodeAlpha, CurrencyCode, MerchantCity } from '@/types'
 
 type NumberString = `${number}`
 
@@ -8,7 +8,7 @@ interface DefaultOptions {
   expiry_date?: NumberString
   company_name?: string
   comments?: string
-  country_code?: CountryCode
+  country_code?: CountryCodeAlpha
   merchant_city?: MerchantCity
   currency_code?: CurrencyCode
   editable?: boolean
@@ -20,7 +20,7 @@ interface GenerateUniqueEntityNumberOptions extends DefaultOptions {
 }
 
 interface GenerateMobileOptions extends DefaultOptions {
-  number: `+${string}`
+  number: `+${CountryCode}${NumberString}`
   number_type?: 'MOBILE'
 }
 

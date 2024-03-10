@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.3.2
+
+### Patch Changes
+
+- 29797c0: Add numeric country code literal type to mobile number type
+
 ## 0.3.1
 
 ### Patch Changes

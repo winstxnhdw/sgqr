@@ -76,8 +76,8 @@ async function main() {
 
   const buffer =
     options.type === 'image/svg+xml'
-      ? await generate_svg(options as GenerateOptions)
-      : await generate_code(options as GenerateCodeOptions)
+      ? await generate_svg(options as GenerateOptions<string, string, string>)
+      : await generate_code(options as GenerateCodeOptions<string, string, string>)
 
   if (!buffer) {
     throw new Error('Failed to generate the QR code!')

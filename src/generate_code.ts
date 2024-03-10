@@ -2,7 +2,9 @@ import { generate } from '@/generate'
 import type { GenerateCodeOptions } from '@/types'
 import { toDataURL } from 'qrcode'
 
-export async function generate_code(options: GenerateCodeOptions): Promise<ArrayBuffer | undefined> {
+export async function generate_code<A extends string, E extends string, N extends string>(
+  options: GenerateCodeOptions<A, E, N>,
+): Promise<ArrayBuffer | undefined> {
   const { type, scale = 100 } = options
   const code = generate(options)
 

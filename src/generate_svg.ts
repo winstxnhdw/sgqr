@@ -2,7 +2,9 @@ import { generate } from '@/generate'
 import type { GenerateOptions } from '@/types'
 import { toString } from 'qrcode'
 
-export async function generate_svg(options: GenerateOptions): Promise<string | undefined> {
+export async function generate_svg<A extends string, E extends string, N extends string>(
+  options: GenerateOptions<A, E, N>,
+): Promise<string | undefined> {
   const code = generate(options)
 
   if (!code) {

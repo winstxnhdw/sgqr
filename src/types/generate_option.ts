@@ -1,11 +1,16 @@
-import type { CountryCode, CountryCodeAlpha, CurrencyCode, MerchantCity } from '@/types'
+import type { CountryCode, CountryCodeAlpha, CurrencyCode, Digit, MerchantCity, StringNumber } from '@/types'
 
-type NumberString = `${number}`
+export type Amount<A extends string> =
+  | StringNumber<A>
+  | `${StringNumber<A>}.${Digit}${Digit}`
+  | `${StringNumber<A>}.${Digit}`
 
-interface DefaultOptions {
-  amount: NumberString
+export type ExpiryDate<E extends string> = StringNumber<E> | '20380119'
+
+interface DefaultOptions<A extends string, E extends string> {
+  amount: Amount<A>
   days_before_expiry?: number
-  expiry_date?: NumberString
+  expiry_date?: ExpiryDate<E>
   company_name?: string
   comments?: string
   country_code?: CountryCodeAlpha
@@ -14,24 +19,27 @@ interface DefaultOptions {
   editable?: boolean
 }
 
-interface GenerateUniqueEntityNumberOptions extends DefaultOptions {
-  number: NumberString
-  number_type?: 'UEN'
+interface GenerateUniqueEntityNumberOptions<A extends string, E extends string, N extends string>
+  extends DefaultOptions<A, E> {
+  number: StringNumber<N>
+  number_type: 'UEN'
 }
 
-interface GenerateMobileOptions extends DefaultOptions {
-  number: `+${CountryCode}${NumberString}`
+interface GenerateMobileOptions<A extends string, E extends string, N extends string> extends DefaultOptions<A, E> {
+  number: `+${CountryCode}${StringNumber<N>}`
   number_type?: 'MOBILE'
 }
 
-export type GenerateOptions = GenerateUniqueEntityNumberOptions | GenerateMobileOptions
+export type GenerateOptions<A extends string, E extends string, N extends string> =
+  | GenerateUniqueEntityNumberOptions<A, E, N>
+  | GenerateMobileOptions<A, E, N>
 
-export type GenerateCodeOptions = GenerateOptions & {
+export type GenerateCodeOptions<A extends string, E extends string, N extends string> = GenerateOptions<A, E, N> & {
   type?: 'image/webp' | 'image/jpeg' | 'image/png'
   scale?: number
 }
 
-export type ConsoleGenerateCodeOptions = Omit<GenerateCodeOptions, 'type'> & {
+export type ConsoleGenerateCodeOptions = Omit<GenerateCodeOptions<string, string, string>, 'type'> & {
   output: string
   type?: 'image/webp' | 'image/jpeg' | 'image/png' | 'image/svg+xml'
 }

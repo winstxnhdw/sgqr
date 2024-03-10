@@ -1,4 +1,6 @@
-export function get_days_from_now(days: number): `${number}` {
+import { ExpiryDate } from '@/types'
+
+export function get_days_from_now<E extends string>(days: number): ExpiryDate<E> {
   const date = new Date()
   date.setDate(date.getDate() + days)
 
@@ -6,5 +8,5 @@ export function get_days_from_now(days: number): `${number}` {
   const month = (date.getMonth() + 1).toString().padStart(2, '0')
   const day = date.getDate().toString().padStart(2, '0')
 
-  return `${year}${month}${day}` as `${number}`
+  return `${year}${month}${day}` as ExpiryDate<E>
 }

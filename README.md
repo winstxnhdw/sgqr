@@ -44,8 +44,6 @@ console.log(code)
 `sgqr` provides an API capable of generating QR codes in `webp`, `jpeg` or `png` formats.
 
 ```ts
-import sgqr from 'sgqr'
-
 const buffer = await sgqr.generate_code({
   number: '+6591234567',
   amount: '1',
@@ -64,19 +62,11 @@ await Bun.write('qr.png', buffer)
 SVGs can be generated with the `generate_svg` API.
 
 ```ts
-import sgqr from 'sgqr'
-
 const buffer = await sgqr.generate_svg({
   number: '+6591234567',
   amount: '1',
   comments: 'This SGQR was made with sgqr!'
 })
-
-if (!buffer) {
-  throw new Error('Failed to generate QR code')
-}
-
-await Bun.write('qr.svg', buffer)
 ```
 
 ### Generate SGQR with UEN
@@ -84,8 +74,6 @@ await Bun.write('qr.svg', buffer)
 If you are a business, you can generate SGQR codes with your UEN.
 
 ```ts
-import sgqr from 'sgqr'
-
 const buffer = await sgqr.generate_code({
   number: '0123456789',
   number_type: 'UEN',
@@ -93,12 +81,6 @@ const buffer = await sgqr.generate_code({
   amount: '4',
   type: 'image/jpeg'
 })
-
-if (!buffer) {
-  throw new Error('Failed to generate QR code')
-}
-
-await Bun.write('qr.png', buffer)
 ```
 
 ### Generate SGQR with Expiry Date
@@ -106,8 +88,6 @@ await Bun.write('qr.png', buffer)
 You can specify an expiry date for the SGQR code. According to the SGQR specification, the expiry date must be in the format `YYYYMMDD`.
 
 ```ts
-import sgqr from 'sgqr'
-
 const buffer = await sgqr.generate_svg({
   number: '0123456789',
   number_type: 'UEN',
@@ -125,20 +105,12 @@ await Bun.write('qr.svg', buffer)
 You can also specify the number of days until the expiry date.
 
 ```ts
-import sgqr from 'sgqr'
-
 const buffer = await sgqr.generate_svg({
   number: '0123456789',
   number_type: 'UEN',
   amount: '1.00',
   days_before_expiry: 1
 })
-
-if (!buffer) {
-  throw new Error('Failed to generate QR code')
-}
-
-await Bun.write('qr.svg', buffer)
 ```
 
 ### Command Line

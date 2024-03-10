@@ -64,7 +64,7 @@ SVGs can be generated with the `generate_svg` API.
 ```ts
 const buffer = await sgqr.generate_svg({
   number: '+6591234567',
-  amount: '1',
+  amount: '1.2',
   comments: 'This SGQR was made with sgqr!'
 })
 ```
@@ -78,7 +78,7 @@ const buffer = await sgqr.generate_code({
   number: '0123456789',
   number_type: 'UEN',
   company_name: 'Singapore Armed Forces',
-  amount: '4',
+  amount: '4.1',
   type: 'image/jpeg'
 })
 ```

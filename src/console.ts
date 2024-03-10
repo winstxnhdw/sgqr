@@ -1,10 +1,10 @@
 import { generate_code } from '@/generate_code'
 import { generate_svg } from '@/generate_svg'
-import type { GenerateCodeOptions, GenerateOptions } from '@/types'
+import type { ConsoleGenerateCodeOptions, GenerateCodeOptions, GenerateOptions } from '@/types'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
-async function parse_args() {
+async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
   const args = await yargs(hideBin(Bun.argv))
     .option('number', {
       describe: 'mobile or unique entity number',
@@ -68,7 +68,7 @@ async function parse_args() {
     .help()
     .parse()
 
-  return args
+  return args as ConsoleGenerateCodeOptions
 }
 
 async function main() {

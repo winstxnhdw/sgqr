@@ -24,16 +24,14 @@ interface GenerateMobileOptions extends DefaultOptions {
   number_type?: 'MOBILE'
 }
 
-interface GenerateCodeMobileOptions extends GenerateMobileOptions {
-  type?: 'image/webp' | 'image/jpeg' | 'image/png'
-  scale?: number
-}
-
-interface GenerateCodeUENOptions extends GenerateUniqueEntityNumberOptions {
-  type?: 'image/webp' | 'image/jpeg' | 'image/png'
-  scale?: number
-}
-
 export type GenerateOptions = GenerateUniqueEntityNumberOptions | GenerateMobileOptions
 
-export type GenerateCodeOptions = GenerateCodeMobileOptions | GenerateCodeUENOptions
+export type GenerateCodeOptions = GenerateOptions & {
+  type?: 'image/webp' | 'image/jpeg' | 'image/png'
+  scale?: number
+}
+
+export type ConsoleGenerateCodeOptions = Omit<GenerateCodeOptions, 'type'> & {
+  output: string
+  type?: 'image/webp' | 'image/jpeg' | 'image/png' | 'image/svg+xml'
+}

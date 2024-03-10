@@ -5,7 +5,7 @@
 [![release.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/publish.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/publish.yml)
 [![formatter.yml](https://github.com/winstxnhdw/sgqr/actions/workflows/formatter.yml/badge.svg)](https://github.com/winstxnhdw/sgqr/actions/workflows/formatter.yml)
 
-A typesafe cross-platform [SGQR](https://www.mas.gov.sg/development/e-payments/sgqr) library for individuals and businesses.
+A web-compatible typesafe [SGQR](https://www.mas.gov.sg/development/e-payments/sgqr) library for individuals and businesses.
 
 ## Install
 

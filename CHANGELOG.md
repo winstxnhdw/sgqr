@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.5.0
+
+### Minor Changes
+
+- 6aa6022: `generate_code` will return `UInt8Array` directly
+
 ## 0.4.0
 
 ### Minor Changes

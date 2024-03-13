@@ -1,5 +1,4 @@
-import { generate_code } from '@/generate_code'
-import { generate_svg } from '@/generate_svg'
+import { generate_code, generate_svg } from '@/generate'
 import type { ConsoleGenerateCodeOptions, GenerateCodeOptions, GenerateOptions } from '@/types'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'

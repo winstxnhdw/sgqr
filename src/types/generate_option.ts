@@ -1,11 +1,12 @@
-import type { CountryCode, CountryCodeAlpha, CurrencyCode, Digit, MerchantCity, StringNumber } from '@/types'
-
-export type Amount<A extends string> =
-  | StringNumber<A>
-  | `${StringNumber<A>}.${Digit}${Digit}`
-  | `${StringNumber<A>}.${Digit}`
-
-export type ExpiryDate<E extends string> = StringNumber<E> | '20380119'
+import type {
+  Amount,
+  CountryCode,
+  CountryCodeAlpha,
+  CurrencyCode,
+  ExpiryDate,
+  MerchantCity,
+  NumberString,
+} from '@/types'
 
 interface DefaultOptions<A extends string, E extends string> {
   amount: Amount<A>
@@ -21,12 +22,12 @@ interface DefaultOptions<A extends string, E extends string> {
 
 interface GenerateUniqueEntityNumberOptions<A extends string, E extends string, N extends string>
   extends DefaultOptions<A, E> {
-  number: StringNumber<N>
+  number: NumberString<N>
   number_type: 'UEN'
 }
 
 interface GenerateMobileOptions<A extends string, E extends string, N extends string> extends DefaultOptions<A, E> {
-  number: `+${CountryCode}${StringNumber<N>}`
+  number: `+${CountryCode}${NumberString<N>}`
   number_type?: 'MOBILE'
 }
 

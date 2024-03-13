@@ -1,4 +1,4 @@
-import type { Amount, CountryCode, ExpiryDate, StringNumber } from '@/types'
+import type { Amount, CountryCode, ExpiryDate, NumberString } from '@/types'
 
 interface CodeParameterGeneric {
   id: '00' | '01' | '52' | '53' | '54' | '58' | '59' | '60'
@@ -20,7 +20,7 @@ interface CodeParameter26<E extends string, N extends string> {
   value: [
     { id: '00'; value: 'SG.PAYNOW' },
     { id: '01'; value: '0' | '2' },
-    { id: '02'; value: StringNumber<N> | `+${CountryCode}${StringNumber<N>}` },
+    { id: '02'; value: NumberString<N> | `+${CountryCode}${NumberString<N>}` },
     { id: '03'; value: '0' | '1' },
     { id: '04'; value: ExpiryDate<E> },
   ]

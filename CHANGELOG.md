@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.5.1
+
+### Patch Changes
+
+- d76d824: rename exported `StringNumber` type to `NumberString`
+
 ## 0.5.0
 
 ### Minor Changes

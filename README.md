@@ -44,17 +44,17 @@ console.log(code)
 `sgqr` provides an API capable of generating QR codes in `webp`, `jpeg` or `png` formats.
 
 ```ts
-const buffer = await sgqr.generate_code({
+const data = await sgqr.generate_code({
   number: '+6591234567',
   amount: '1',
   type: 'image/webp'
 })
 
-if (!buffer) {
+if (!data) {
   throw new Error('Failed to generate QR code')
 }
 
-await Bun.write('qr.png', buffer)
+await Bun.write('qr.png', data)
 ```
 
 ### Generate SGQR SVG
@@ -62,7 +62,7 @@ await Bun.write('qr.png', buffer)
 SVGs can be generated with the `generate_svg` API.
 
 ```ts
-const buffer = await sgqr.generate_svg({
+const data = await sgqr.generate_svg({
   number: '+6591234567',
   amount: '1.2',
   comments: 'This SGQR was made with sgqr!'
@@ -74,7 +74,7 @@ const buffer = await sgqr.generate_svg({
 If you are a business, you can generate SGQR codes with your UEN.
 
 ```ts
-const buffer = await sgqr.generate_code({
+const data = await sgqr.generate_code({
   number: '0123456789',
   number_type: 'UEN',
   company_name: 'Singapore Armed Forces',
@@ -88,24 +88,24 @@ const buffer = await sgqr.generate_code({
 You can specify an expiry date for the SGQR code. According to the SGQR specification, the expiry date must be in the format `YYYYMMDD`.
 
 ```ts
-const buffer = await sgqr.generate_svg({
+const data = await sgqr.generate_svg({
   number: '0123456789',
   number_type: 'UEN',
   amount: '1.00',
   expiry_date: '20251231'
 })
 
-if (!buffer) {
+if (!data) {
   throw new Error('Failed to generate QR code')
 }
 
-await Bun.write('qr.svg', buffer)
+await Bun.write('qr.svg', data)
 ```
 
 You can also specify the number of days until the expiry date.
 
 ```ts
-const buffer = await sgqr.generate_svg({
+const data = await sgqr.generate_svg({
   number: '0123456789',
   number_type: 'UEN',
   amount: '1.00',

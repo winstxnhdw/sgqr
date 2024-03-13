@@ -4,7 +4,7 @@ import { toDataURL } from 'qrcode'
 
 export async function generate_code<A extends string, E extends string, N extends string>(
   options: GenerateCodeOptions<A, E, N>,
-): Promise<ArrayBuffer | undefined> {
+): Promise<Uint8Array | undefined> {
   const { type, scale = 100 } = options
   const code = generate(options)
 
@@ -29,12 +29,11 @@ export async function generate_code<A extends string, E extends string, N extend
 
   const binary = atob(base64)
   const length = binary.length
-  const buffer = new ArrayBuffer(length)
-  const view = new Uint8Array(buffer)
+  const array = new Uint8Array(length)
 
   for (let i = 0; i < length; i++) {
-    view[i] = binary.charCodeAt(i)
+    array[i] = binary.charCodeAt(i)
   }
 
-  return buffer
+  return array
 }

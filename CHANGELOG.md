@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.5.2
+
+### Patch Changes
+
+- 0505e0b: move `yargs` to dev dependency
+
 ## 0.5.1
 
 ### Patch Changes

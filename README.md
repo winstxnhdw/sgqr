@@ -108,17 +108,6 @@ if (!data) {
 await Bun.write('qr.svg', data)
 ```
 
-You can also specify the number of days until the expiry date.
-
-```ts
-const data = await sgqr.generate_svg({
-  number: '0123456789',
-  number_type: 'UEN',
-  amount: '1.00',
-  days_before_expiry: 1
-})
-```
-
 ### Command Line
 
 `sgqr` can also be used as a command line tool. The binary can be found [here](https://github.com/winstxnhdw/sgqr/releases/tag/latest).
@@ -129,22 +118,21 @@ sgqr --number +6591234567 --amount 420.69 --type image/svg+xml --output qr.svg
 
 ```yml
 Options:
-  --version             Show version number                             [boolean]
-  --number              mobile or unique entity number                  [string] [required]
-  --amount              payment amount as a string                      [string] [required]
-  --output              output file path                                [string] [required]
-  --number_type         UEN or MOBILE                                   [string]
-  --company_name        company name                                    [string]
-  --comments            comments                                        [string]
-  --country_code        country code                                    [string]
-  --scale               scale of the image                              [number]
-  --days_before_expiry  number of days until the expiry date            [number]
-  --expiry_date         expiry date as a string                         [string]
-  --merchant_city       merchant city                                   [string]
-  --currency_code       currency code                                   [string]
-  --type                type of image, either webp, jpeg or svg         [choices: "image/webp", "image/jpeg", "image/svg+xml"]
-  --editable            if the code is editable                         [boolean]
-  --help                Show help                                       [boolean]
+  --version             Show version number                     [boolean]
+  --number              mobile or unique entity number          [string] [required]
+  --amount              payment amount as a string              [string] [required]
+  --output              output file path                        [string] [required]
+  --number_type         UEN or MOBILE                           [string]
+  --company_name        company name                            [string]
+  --comments            comments                                [string]
+  --country_code        country code                            [string]
+  --scale               scale of the image                      [number]
+  --expiry_date         expiry date as a string                 [string]
+  --merchant_city       merchant city                           [string]
+  --currency_code       currency code                           [string]
+  --type                type of image, either webp, jpeg or svg [choices: "image/webp", "image/jpeg", "image/svg+xml"]
+  --editable            if the code is editable                 [boolean]
+  --help                Show help                               [boolean]
 ```
 
 ## Development

@@ -1,4 +1,4 @@
-import { crc16, get_days_from_now } from '@/helpers'
+import { crc16 } from '@/helpers'
 import type { CodeParameter, GenerateOptions } from '@/types'
 
 export function generate<A extends string, E extends string, N extends string>(
@@ -7,7 +7,6 @@ export function generate<A extends string, E extends string, N extends string>(
   const {
     number,
     amount,
-    days_before_expiry,
     expiry_date = '20380119',
     number_type = 'MOBILE',
     company_name = '',
@@ -17,8 +16,6 @@ export function generate<A extends string, E extends string, N extends string>(
     currency_code = '702',
     editable = false,
   } = options
-
-  const date_of_expiry = days_before_expiry ? get_days_from_now<E>(days_before_expiry) : expiry_date
 
   const data: CodeParameter<A, E, N>[] = [
     { id: '00', value: '01' },
@@ -30,7 +27,7 @@ export function generate<A extends string, E extends string, N extends string>(
         { id: '01', value: number_type === 'MOBILE' ? '0' : '2' },
         { id: '02', value: number },
         { id: '03', value: editable ? '1' : '0' },
-        { id: '04', value: date_of_expiry },
+        { id: '04', value: expiry_date },
       ],
     },
     { id: '52', value: '0000' },

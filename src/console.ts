@@ -40,10 +40,6 @@ async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
       describe: 'scale of the image',
       type: 'number',
     })
-    .option('days_before_expiry', {
-      describe: 'number of days until the expiry date',
-      type: 'number',
-    })
     .option('expiry_date', {
       describe: 'expiry date as a string',
       type: 'string',

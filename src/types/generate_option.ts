@@ -10,7 +10,6 @@ import type {
 
 interface DefaultOptions<A extends string, E extends string> {
   amount: Amount<A>
-  days_before_expiry?: number
   expiry_date?: ExpiryDate<E>
   company_name?: string
   comments?: string

@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.7.0
+
+### Minor Changes
+
+- dd050eb: use actual specification name for `company_name`
+
 ## 0.6.0
 
 ### Minor Changes

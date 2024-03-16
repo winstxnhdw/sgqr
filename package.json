@@ -11,7 +11,7 @@
   "scripts": {
     "lint": "eslint .",
     "dev": "bun src/index.ts",
-    "build": "tsup src/index.ts --format cjs,esm --dts --minify",
+    "build": "tsup",
     "compile": "bun build src/console.ts --outfile bin/sgqr --compile",
     "release": "bun run build && changeset publish",
     "test": "bun test --watch"

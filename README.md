@@ -10,16 +10,22 @@ A web-compatible typesafe [SGQR](https://www.mas.gov.sg/development/e-payments/s
 
 ## Install
 
+You can depend on `sgqr` from `npm` or via CDN.
+
+### Node
+
 ```bash
 npm i sgqr
 ```
 
 ```bash
-pnpm i sgqr
+bun add sgqr
 ```
 
-```bash
-bun add sgqr
+### Browser
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/sgqr/dist/index.global.js"></script>
 ```
 
 ## Usage

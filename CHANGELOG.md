@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.5.3
+
+### Patch Changes
+
+- 187ddbd: build for CDN
+
 ## 0.5.2
 
 ### Patch Changes

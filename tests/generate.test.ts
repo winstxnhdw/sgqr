@@ -10,7 +10,7 @@ test('returns a valid SGQR text', () => {
     '00020101021226360009SG.PAYNOW010100204+6500301004010520400005303702540105802SG59006009Singapore6204010063042F19',
   )
 
-  expect(generate({ number: '+650', amount: '0', company_name: '0' })).toEqual(
+  expect(generate({ number: '+650', amount: '0', merchant_name: '0' })).toEqual(
     '00020101021226430009SG.PAYNOW010100204+65003010040820380119520400005303702540105802SG590106009Singapore6204010063042C43',
   )
 

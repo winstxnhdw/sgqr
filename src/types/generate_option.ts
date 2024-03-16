@@ -11,7 +11,7 @@ import type {
 interface DefaultOptions<A extends string, E extends string> {
   amount: Amount<A>
   expiry_date?: ExpiryDate<E>
-  company_name?: string
+  merchant_name?: string
   comments?: string
   country_code?: CountryCodeAlpha
   merchant_city?: MerchantCity

@@ -24,7 +24,7 @@ async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
       describe: 'UEN or MOBILE',
       type: 'string',
     })
-    .option('company_name', {
+    .option('merchant_name', {
       describe: 'company name',
       type: 'string',
     })

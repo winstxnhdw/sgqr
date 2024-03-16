@@ -1,33 +1,64 @@
-import type { Amount, CountryCode, ExpiryDate, NumberString } from '@/types'
+import type { Amount, CountryCodeAlpha, CurrencyCode, DataObject } from '@/types'
 
-interface CodeParameterGeneric {
-  id: '00' | '01' | '52' | '53' | '54' | '58' | '59' | '60'
+interface PayloadFormatIndicator extends DataObject {
+  id: '00'
+  value: '01'
+}
+
+interface PointOfInitiationMethod extends DataObject {
+  id: '01'
+  value: '12'
+}
+
+interface MerchantAccountInformation extends DataObject {
+  id: '26'
   value: string
 }
 
-interface CodeParameter62 {
-  id: '62'
-  value: [{ id: '01'; value: string }]
+interface MerchantCategoryCode extends DataObject {
+  id: '52'
+  value: '0000'
 }
 
-interface CodeParameter54<A extends string> {
+interface TransactionCurrency extends DataObject {
+  id: '53'
+  value: CurrencyCode
+}
+
+interface TransactionAmount<A extends string> {
   id: '54'
   value: Amount<A>
 }
 
-interface CodeParameter26<E extends string, N extends string> {
-  id: '26'
-  value: [
-    { id: '00'; value: 'SG.PAYNOW' },
-    { id: '01'; value: '0' | '2' },
-    { id: '02'; value: NumberString<N> | `+${CountryCode}${NumberString<N>}` },
-    { id: '03'; value: '0' | '1' },
-    { id: '04'; value: ExpiryDate<E> },
-  ]
+interface CountryCode extends DataObject {
+  id: '58'
+  value: CountryCodeAlpha
 }
 
-export type CodeParameter<A extends string, E extends string, N extends string> =
-  | CodeParameterGeneric
-  | CodeParameter26<E, N>
-  | CodeParameter54<A>
-  | CodeParameter62
+interface MerchantName extends DataObject {
+  id: '59'
+  value: string
+}
+
+interface MerchantCity extends DataObject {
+  id: '60'
+  value: string
+}
+
+interface AdditionalConsumerDataRequest extends DataObject {
+  id: '62'
+  value: string
+}
+
+export type CodeSpecification<A extends string> = readonly [
+  PayloadFormatIndicator,
+  PointOfInitiationMethod,
+  MerchantAccountInformation,
+  MerchantCategoryCode,
+  TransactionCurrency,
+  TransactionAmount<A>,
+  CountryCode,
+  MerchantName,
+  MerchantCity,
+  AdditionalConsumerDataRequest,
+]

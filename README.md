@@ -83,7 +83,7 @@ If you are a business, you can generate SGQR codes with your UEN.
 const data = await sgqr.generate_code({
   number: '0123456789',
   number_type: 'UEN',
-  company_name: 'Singapore Armed Forces',
+  merchant_name: 'Singapore Armed Forces',
   amount: '4.1',
   type: 'image/jpeg'
 })
@@ -123,7 +123,7 @@ Options:
   --amount              payment amount as a string              [string] [required]
   --output              output file path                        [string] [required]
   --number_type         UEN or MOBILE                           [string]
-  --company_name        company name                            [string]
+  --merchant_name       merchant name                           [string]
   --comments            comments                                [string]
   --country_code        country code                            [string]
   --scale               scale of the image                      [number]

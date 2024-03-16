@@ -118,21 +118,21 @@ sgqr --number +6591234567 --amount 420.69 --type image/svg+xml --output qr.svg
 
 ```yml
 Options:
-  --version             Show version number                     [boolean]
-  --number              mobile or unique entity number          [string] [required]
-  --amount              payment amount as a string              [string] [required]
-  --output              output file path                        [string] [required]
-  --number_type         UEN or MOBILE                           [string]
-  --merchant_name       merchant name                           [string]
-  --comments            comments                                [string]
-  --country_code        country code                            [string]
-  --scale               scale of the image                      [number]
-  --expiry_date         expiry date as a string                 [string]
-  --merchant_city       merchant city                           [string]
-  --currency_code       currency code                           [string]
-  --type                type of image, either webp, jpeg or svg [choices: "image/webp", "image/jpeg", "image/svg+xml"]
-  --editable            if the code is editable                 [boolean]
-  --help                Show help                               [boolean]
+  --version             Show version number             [boolean]
+  --number              mobile or unique entity number  [string] [required]
+  --amount              payment amount as a string      [string] [required]
+  --output              output file path                [string] [required]
+  --number_type         UEN or MOBILE                   [choices: "UEN", "MOBILE"]
+  --merchant_name       merchant name                   [string]
+  --comments            comments                        [string]
+  --country_code        country code                    [string]
+  --scale               scale of the image              [number]
+  --expiry_date         expiry date as a string         [string]
+  --merchant_city       merchant city                   [string]
+  --currency_code       currency code                   [string]
+  --type                type of image                   [choices: "image/webp", "image/jpeg", "image/svg+xml"]
+  --editable            if the code is editable         [boolean]
+  --help                Show help                       [boolean]
 ```
 
 ## Development

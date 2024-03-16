@@ -22,7 +22,7 @@ async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
     })
     .option('number_type', {
       describe: 'UEN or MOBILE',
-      type: 'string',
+      choices: ['UEN', 'MOBILE'],
     })
     .option('merchant_name', {
       describe: 'company name',
@@ -53,7 +53,7 @@ async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
       type: 'string',
     })
     .option('type', {
-      describe: 'type of image, either webp, jpeg or svg',
+      describe: 'type of image',
       choices: ['image/webp', 'image/jpeg', 'image/svg+xml'],
     })
     .option('editable', {

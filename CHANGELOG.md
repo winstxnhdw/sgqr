@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.6.0
+
+### Minor Changes
+
+- 38d1cbb: remove `days_before_expiry` flag
+
 ## 0.5.3
 
 ### Patch Changes

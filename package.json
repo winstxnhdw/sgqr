@@ -26,7 +26,7 @@
     "@types/yargs": "^17.0.32",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
-    "bun-types": "^1.0.32",
+    "bun-types": "^1.0.33",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.5",

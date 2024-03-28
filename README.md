@@ -8,6 +8,9 @@
 
 A web-compatible typesafe [SGQR](https://www.mas.gov.sg/development/e-payments/sgqr) library for individuals and businesses.
 
+> [!IMPORTANT]\
+> `sgqr` is still a work-in-progress and may undergo drastic API changes to maximise DX and performance. See the following [discussion](https://github.com/winstxnhdw/sgqr/discussions/28) for more information.
+
 ## Install
 
 You can depend on `sgqr` from `npm` or via CDN.

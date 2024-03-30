@@ -2,12 +2,17 @@
   "name": "sgqr",
   "license": "MIT",
   "version": "0.7.1",
+  "homepage": "http://github.com/winstxnhdw/sgqr",
   "main": "dist/index.js",
   "module": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/winstxnhdw/sgqr.git"
+  },
   "scripts": {
     "lint": "eslint .",
     "dev": "bun src/index.ts",

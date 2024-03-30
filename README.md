@@ -124,7 +124,7 @@ Options:
   --version             Show version number             [boolean]
   --number              mobile or unique entity number  [string] [required]
   --amount              payment amount as a string      [string] [required]
-  --output              output file path                [string] [required]
+  --output              output file path                [string]
   --number_type         UEN or MOBILE                   [choices: "UEN", "MOBILE"]
   --merchant_name       merchant name                   [string]
   --comments            comments                        [string]

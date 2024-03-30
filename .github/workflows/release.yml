@@ -30,6 +30,13 @@ jobs:
       - name: Compile
         run: bun compile
 
+      - name: Test
+        run: |
+          bin/sgqr \
+            --number +6591234567 \
+            --amount 420.69 \
+            --type image/svg+xml | cat | grep '<svg.*xmlns="http://www.w3.org/2000/svg"'
+
       - name: Compress binary
         run: zip -r bin/sgqr-linux.zip bin/sgqr
 

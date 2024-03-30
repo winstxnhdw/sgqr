@@ -18,7 +18,6 @@ async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
     .option('output', {
       describe: 'output file path',
       type: 'string',
-      demandOption: true,
     })
     .option('number_type', {
       describe: 'UEN or MOBILE',
@@ -78,7 +77,7 @@ async function main() {
     throw new Error('Failed to generate the QR code!')
   }
 
-  await Bun.write(options.output, buffer)
+  await Bun.write(options.output ?? Bun.stdout, buffer)
 }
 
 void main()

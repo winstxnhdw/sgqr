@@ -1,7 +1,7 @@
 {
   "name": "sgqr",
   "license": "MIT",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "homepage": "http://github.com/winstxnhdw/sgqr",
   "main": "dist/index.js",
   "module": "dist/index.cjs",

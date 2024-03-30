@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.7.2
+
+### Patch Changes
+
+- 857edf7: set homepage and repository links
+
 ## 0.7.1
 
 ### Patch Changes

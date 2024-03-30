@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.7.1
+
+### Patch Changes
+
+- 47f94f5: fix IIFE distribution to target the browser
+
 ## 0.7.0
 
 ### Minor Changes

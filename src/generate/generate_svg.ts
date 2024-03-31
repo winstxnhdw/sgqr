@@ -14,6 +14,7 @@ export async function generate_svg<A extends string, E extends string, N extends
   const svg_string = await toString(code, {
     type: 'svg',
     errorCorrectionLevel: 'H',
+    color: { dark: '#941C80' },
   })
 
   return svg_string

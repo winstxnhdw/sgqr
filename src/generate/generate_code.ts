@@ -16,9 +16,8 @@ export async function generate_code<A extends string, E extends string, N extend
     type: type,
     errorCorrectionLevel: 'H',
     scale: scale,
-    rendererOpts: {
-      quality: 1,
-    },
+    rendererOpts: { quality: 1 },
+    color: { dark: '#941C80' },
   })
 
   const base64 = data_url.split(',')[1]

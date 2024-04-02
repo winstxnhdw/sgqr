@@ -9,6 +9,8 @@ on:
     branches: main
     types: completed
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   compile-linux:
     runs-on: ubuntu-latest
@@ -38,52 +40,75 @@ jobs:
             --type image/svg+xml | cat | grep '<svg.*xmlns="http://www.w3.org/2000/svg"'
 
       - name: Compress binary
-        run: zip -r bin/sgqr-linux.zip bin/sgqr
+        run: zip -rj sgqr-linux.zip bin/sgqr
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4.3.1
         with:
-          name: build
-          path: bin/sgqr-linux.zip
+          name: build-linux
+          path: sgqr-linux.zip
 
-  # compile-windows:
-  #   runs-on: windows-latest
+  compile-windows:
+    runs-on: windows-latest
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #       with:
-  #         show-progress: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
 
-  #     - name: Setup Bun
-  #       uses: oven-sh/setup-bun@v1.2.0
-  #       with:
-  #         bun-version: latest
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1.2.0
+        with:
+          bun-version: latest
 
-  #     - name: Install node dependencies
-  #       run: bun install --frozen-lockfile
+      - name: Install node dependencies
+        run: bun install --frozen-lockfile
 
-  #     - name: Compile
-  #       run: bun compile
+      - name: Compile
+        run: bun compile
 
-  #     - name: Compress binary
-  #       run: Compress-Archive -Path bin/sgqr -DestinationPath bin/sgqr-win.zip
+      - name: Test
+        run: |
+          bin/sgqr `
+            --number +6591234567 `
+            --amount 420.69 `
+            --type image/svg+xml | Select-String "<svg.*xmlns=`"http://www.w3.org/2000/svg`""
 
-  #     - name: Upload artifact
-  #       uses: actions/upload-artifact@v4.3.1
-  #       with:
-  #         name: build
-  #         path: bin/sgqr-win.zip
+      - name: Compress binary
+        run: Compress-Archive -Path bin/sgqr.exe -DestinationPath sgqr-windows.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: build-windows
+          path: sgqr-windows.zip
 
   release:
     if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
-    needs: compile-linux
-    uses: winstxnhdw/actions/.github/workflows/release.yml@main
-    with:
-      release-tag: latest
-      release-title: Build
-      release-asset: bin/*
-      artifact-name: build
-      artifact-path: bin/
+    needs: [compile-linux, compile-windows]
+    runs-on: ubuntu-latest
     permissions:
       contents: write
+
+    steps:
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4.1.4
+        with:
+          name: build-linux
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4.1.4
+        with:
+          name: build-windows
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: latest
+          RELEASE_TITLE: Build
+        run: |
+          gh release delete $RELEASE_TAG -y || true
+          gh release create $RELEASE_TAG -t "$RELEASE_TITLE" -n "$(git log -1 --pretty=format:"%B")" || true
+          gh release upload $RELEASE_TAG sgqr-linux.zip sgqr-windows.zip --clobber

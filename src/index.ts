@@ -1,4 +1,8 @@
-import { Amount as AmountGeneric, ExpiryDate as ExpiryDateGeneric, NumberString as NumberStringGeneric } from '@/types'
+import type {
+  Amount as AmountGeneric,
+  ExpiryDate as ExpiryDateGeneric,
+  NumberString as NumberStringGeneric,
+} from '@/types'
 
 export { generate, generate_code, generate_svg } from '@/generate'
 export type { CountryCode, CountryCodeAlpha, CurrencyCode, MerchantCity } from '@/types'

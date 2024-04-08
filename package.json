@@ -6,15 +6,13 @@
   "main": "dist/index.js",
   "module": "dist/index.cjs",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": {
     "type": "git",
     "url": "git://github.com/winstxnhdw/sgqr.git"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "biome check .",
     "dev": "bun src/index.ts",
     "build": "tsup",
     "compile": "bun build src/console.ts --outfile bin/sgqr --compile",
@@ -26,15 +24,11 @@
     "tslib": "^2.6.2"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.6.4",
     "@changesets/cli": "^2.27.1",
     "@types/qrcode": "^1.5.5",
     "@types/yargs": "^17.0.32",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
     "bun-types": "^1.1.1",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.2.5",
     "tsup": "^8.0.2",
     "typescript": "^5.4.4",
     "yargs": "^17.7.2"

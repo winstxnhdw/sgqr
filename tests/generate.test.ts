@@ -1,5 +1,5 @@
-import { generate } from '@/generate'
 import { expect, test } from 'bun:test'
+import { generate } from '@/generate'
 
 test('returns a valid SGQR text', () => {
   expect(generate({ number: '+650', amount: '0' })).toEqual(

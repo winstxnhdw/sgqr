@@ -1,5 +1,5 @@
-import { crc16 } from '@/helpers'
 import { expect, test } from 'bun:test'
+import { crc16 } from '@/helpers'
 
 test('returns the correct CRC-16 value for a given string', () => expect(crc16('hello world')).toEqual('EFEB'))
 

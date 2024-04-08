@@ -1,6 +1,6 @@
 import { generate } from '@/generate'
 import type { GenerateOptions } from '@/types'
-import { toString } from 'qrcode'
+import { toString as qr_to_string } from 'qrcode'
 
 export async function generate_svg<A extends string, E extends string, N extends string>(
   options: GenerateOptions<A, E, N>,
@@ -11,7 +11,7 @@ export async function generate_svg<A extends string, E extends string, N extends
     return undefined
   }
 
-  const svg_string = await toString(code, {
+  const svg_string = await qr_to_string(code, {
     type: 'svg',
     errorCorrectionLevel: 'H',
     color: { dark: '#941C80' },

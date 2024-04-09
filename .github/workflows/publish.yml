@@ -113,6 +113,11 @@ jobs:
           pattern: artifact-*
           merge-multiple: true
 
+      - name: Rename artifacts
+        run: | 
+          mv sgqr-ubuntu.zip sgqr-linux.zip
+          mv sgqr-macos.zip sgqr-linux-arm64.zip
+
       - name: Release
         run: gh release upload $(gh release view --json tagName -q .tagName) sgqr-*.zip
         env:

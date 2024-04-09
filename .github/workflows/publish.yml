@@ -13,14 +13,17 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  contents: write
-  pull-requests: write
-
 jobs:
   publish:
     if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
 
     steps:
       - name: Checkout repository
@@ -38,11 +41,109 @@ jobs:
 
       - name: Create release PR or publish
         uses: changesets/action@v1.4.7
+        id: changesets
         with:
           title: 'build: bump version packages'
           commit: 'build: bump version packages'
-          createGithubReleases: false
           publish: bun release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  compile-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1.2.1
+        with:
+          bun-version: latest
+
+      - name: Install node dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Compile
+        run: bun compile
+
+      - name: Test
+        run: |
+          bin/sgqr \
+            --number +6591234567 \
+            --amount 420.69 \
+            --type image/svg+xml | cat | grep '<svg.*xmlns="http://www.w3.org/2000/svg"'
+
+      - name: Compress binary
+        run: zip -rj sgqr-linux.zip bin/sgqr
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: build-linux
+          path: sgqr-linux.zip
+
+  compile-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1.2.1
+        with:
+          bun-version: latest
+
+      - name: Install node dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Compile
+        run: bun compile
+
+      - name: Test
+        run: |
+          bin/sgqr `
+            --number +6591234567 `
+            --amount 420.69 `
+            --type image/svg+xml | Select-String "<svg.*xmlns=`"http://www.w3.org/2000/svg`""
+
+      - name: Compress binary
+        run: Compress-Archive -Path bin/sgqr.exe -DestinationPath sgqr-windows.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: build-windows
+          path: sgqr-windows.zip
+
+  release:
+    needs: [publish, compile-linux, compile-windows]
+    if: needs.publish.outputs.published || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4.1.4
+        with:
+          name: build-linux
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4.1.4
+        with:
+          name: build-windows
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          RELEASE_TAG=$(gh release view --json tagName --jq .tagName)
+          gh release upload $RELEASE_TAG sgqr-linux.zip sgqr-windows.zip --clobber

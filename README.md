@@ -113,7 +113,7 @@ await Bun.write('qr.svg', data)
 
 ### Command Line
 
-`sgqr` can also be used as a command line tool. The binary can be found [here](https://github.com/winstxnhdw/sgqr/releases/tag/latest).
+`sgqr` can also be used as a command line tool. The binary can be found [here](https://github.com/winstxnhdw/sgqr/releases).
 
 ```bash
 sgqr --number +6591234567 --amount 420.69 --type image/svg+xml --output qr.svg

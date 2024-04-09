@@ -1,4 +1,4 @@
-import type { CountryCode, DataObject, ExpiryDate, NumberString } from '@/types'
+import type { DataObject, DialingCode, ExpiryDate, NumberString } from '@/types'
 
 interface GloballyUniqueIdentifier extends DataObject {
   id: '00'
@@ -12,7 +12,7 @@ interface ProxyType extends DataObject {
 
 interface ProxyValue<N extends string> extends DataObject {
   id: '02'
-  value: NumberString<N> | `+${CountryCode}${NumberString<N>}`
+  value: NumberString<N> | `+${DialingCode}${NumberString<N>}`
 }
 
 interface Editable extends DataObject {

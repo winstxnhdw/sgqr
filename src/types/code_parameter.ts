@@ -1,4 +1,4 @@
-import type { Amount, CountryCodeAlpha, CurrencyCode, DataObject } from '@/types'
+import type { Amount, CountryCode, CurrencyCode, DataObject } from '@/types'
 
 interface PayloadFormatIndicator extends DataObject {
   id: '00'
@@ -30,9 +30,9 @@ interface TransactionAmount<A extends string> {
   value: Amount<A>
 }
 
-interface CountryCode extends DataObject {
+interface CountryCodeObject extends DataObject {
   id: '58'
-  value: CountryCodeAlpha
+  value: CountryCode
 }
 
 interface MerchantName extends DataObject {
@@ -57,7 +57,7 @@ export type CodeSpecification<A extends string> = readonly [
   MerchantCategoryCode,
   TransactionCurrency,
   TransactionAmount<A>,
-  CountryCode,
+  CountryCodeObject,
   MerchantName,
   MerchantCity,
   AdditionalConsumerDataRequest,

@@ -13,7 +13,6 @@
   },
   "scripts": {
     "lint": "biome check .",
-    "dev": "bun src/index.ts",
     "build": "tsup",
     "compile": "bun build src/console.ts --outfile bin/sgqr --compile",
     "release": "bun run build && changeset publish",

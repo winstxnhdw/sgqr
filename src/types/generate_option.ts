@@ -1,20 +1,12 @@
-import type {
-  Amount,
-  CountryCode,
-  CountryCodeAlpha,
-  CurrencyCode,
-  ExpiryDate,
-  MerchantCity,
-  NumberString,
-} from '@/types'
+import type { Amount, CountryCode, CurrencyCode, DialingCode, ExpiryDate, NumberString } from '@/types'
 
 interface DefaultOptions<A extends string, E extends string> {
   amount: Amount<A>
   expiry_date?: ExpiryDate<E>
   merchant_name?: string
   comments?: string
-  country_code?: CountryCodeAlpha
-  merchant_city?: MerchantCity
+  country_code?: CountryCode
+  merchant_city?: string
   currency_code?: CurrencyCode
   editable?: boolean
 }
@@ -26,7 +18,7 @@ interface GenerateUniqueEntityNumberOptions<A extends string, E extends string, 
 }
 
 interface GenerateMobileOptions<A extends string, E extends string, N extends string> extends DefaultOptions<A, E> {
-  number: `+${CountryCode}${NumberString<N>}`
+  number: `+${DialingCode}${NumberString<N>}`
   number_type?: 'MOBILE'
 }
 

@@ -11,7 +11,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   publish:
-    if: github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     permissions:
@@ -46,8 +46,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-  compile-linux:
-    runs-on: ubuntu-latest
+  compile:
+    runs-on: ${{ matrix.runs-on }}-latest
+    strategy:
+      matrix:
+        runs-on: [ubuntu, macos, windows]
 
     steps:
       - name: Checkout repository
@@ -66,61 +69,39 @@ jobs:
       - name: Compile
         run: bun compile
 
-      - name: Test
+      - name: Test on Linux
+        if: matrix.runs-on != 'windows'
         run: |
           bin/sgqr \
             --number +6591234567 \
             --amount 420.69 \
             --type image/svg+xml | cat | grep '<svg.*xmlns="http://www.w3.org/2000/svg"'
 
-      - name: Compress binary
-        run: zip -rj sgqr-linux.zip bin/sgqr
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4.3.1
-        with:
-          name: build-linux
-          path: sgqr-linux.zip
-
-  compile-windows:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          show-progress: false
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1.2.1
-        with:
-          bun-version: latest
-
-      - name: Install node dependencies
-        run: bun install --frozen-lockfile
-
-      - name: Compile
-        run: bun compile
-
-      - name: Test
+      - name: Test on Windows
+        if: matrix.runs-on == 'windows'
         run: |
           bin/sgqr `
             --number +6591234567 `
             --amount 420.69 `
             --type image/svg+xml | Select-String "<svg.*xmlns=`"http://www.w3.org/2000/svg`""
 
-      - name: Compress binary
-        run: Compress-Archive -Path bin/sgqr.exe -DestinationPath sgqr-windows.zip
+      - name: Compress binary on Linux
+        if: matrix.runs-on != 'windows'
+        run: zip -rj sgqr-${{ matrix.runs-on }}.zip bin/sgqr
+
+      - name: Compress binary on Windows
+        if: matrix.runs-on == 'windows'
+        run: Compress-Archive -Path bin/sgqr.exe -DestinationPath sgqr-${{ matrix.runs-on }}.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4.3.1
         with:
-          name: build-windows
-          path: sgqr-windows.zip
+          name: artifact-${{ matrix.runs-on }}
+          path: sgqr-${{ matrix.runs-on }}.zip
 
   release:
-    needs: [publish, compile-linux, compile-windows]
-    if: needs.publish.outputs.published == 'true'
+    needs: [publish, compile]
+    if: needs.publish.outputs.published
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -129,12 +110,8 @@ jobs:
       - name: Download Linux artifact
         uses: actions/download-artifact@v4.1.4
         with:
-          name: build-linux
-
-      - name: Download Windows artifact
-        uses: actions/download-artifact@v4.1.4
-        with:
-          name: build-windows
+          pattern: artifact-*
+          merge-multiple: true
 
       - name: Release
         run: gh release upload $(gh release view --json tagName -q .tagName) sgqr-*.zip

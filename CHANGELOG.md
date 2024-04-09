@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.8.0
+
+### Minor Changes
+
+- e1bc4d2: use the same QR code colour as PayNow
+
 ## 0.7.2
 
 ### Patch Changes

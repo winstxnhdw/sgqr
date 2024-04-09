@@ -1,21 +1,17 @@
 name: Publish
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: CI
     branches: main
     types: completed
-  push:
-    branches: main
-    paths:
-      - .github/workflows/publish.yml
-      - .changeset/**
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   publish:
-    if: github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     permissions:
@@ -124,7 +120,7 @@ jobs:
 
   release:
     needs: [publish, compile-linux, compile-windows]
-    if: needs.publish.outputs.published || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
+    if: needs.publish.outputs.published == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -141,9 +137,7 @@ jobs:
           name: build-windows
 
       - name: Release
+        run: gh release upload $(gh release view --json tagName -q .tagName) sgqr-*.zip
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-        run: |
-          RELEASE_TAG=$(gh release view --json tagName --jq .tagName)
-          gh release upload $RELEASE_TAG sgqr-linux.zip sgqr-windows.zip --clobber

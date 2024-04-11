@@ -101,7 +101,7 @@ jobs:
 
   release:
     needs: [publish, compile]
-    if: needs.publish.outputs.published
+    if: needs.publish.outputs.published == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write

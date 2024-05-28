@@ -6,6 +6,18 @@
   "main": "dist/index.js",
   "module": "dist/index.cjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./out/web.mjs",
+      "module": "./dist/index.cjs"
+  },
+    "./utils": {
+        "types": "./dist/utils/index.d.ts",
+        "default": "./dist/utils/index.js",
+        "module": "./dist/utils/index.cjs"
+    }
+},
   "files": ["dist"],
   "repository": {
     "type": "git",

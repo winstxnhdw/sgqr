@@ -28,7 +28,7 @@ jobs:
           show-progress: false
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1.2.1
+        uses: oven-sh/setup-bun@v1.2.2
         with:
           bun-version: latest
 
@@ -59,7 +59,7 @@ jobs:
           show-progress: false
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1.2.1
+        uses: oven-sh/setup-bun@v1.2.2
         with:
           bun-version: latest
 

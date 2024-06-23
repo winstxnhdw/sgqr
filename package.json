@@ -39,7 +39,7 @@
     "@changesets/cli": "^2.27.5",
     "@types/qrcode": "^1.5.5",
     "@types/yargs": "^17.0.32",
-    "bun-types": "^1.1.15",
+    "bun-types": "^1.1.16",
     "tsup": "^8.1.0",
     "typescript": "^5.5.2",
     "yargs": "^17.7.2"

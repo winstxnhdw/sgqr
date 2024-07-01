@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
-    "@changesets/cli": "^2.27.6",
+    "@changesets/cli": "^2.27.7",
     "@types/qrcode": "^1.5.5",
     "@types/yargs": "^17.0.32",
     "bun-types": "^1.1.17",

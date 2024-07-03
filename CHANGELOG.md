@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.8.1
+
+### Patch Changes
+
+- 94852fc: UENs should support alphanumeric
+
 ## 0.8.0
 
 ### Minor Changes

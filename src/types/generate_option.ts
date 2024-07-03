@@ -1,4 +1,4 @@
-import type { Amount, CountryCode, CurrencyCode, DialingCode, ExpiryDate, NumberString } from '@/types'
+import type { Alphanumeric, Amount, CountryCode, CurrencyCode, DialingCode, ExpiryDate, NumberString } from '@/types'
 
 interface DefaultOptions<A extends string, E extends string> {
   amount: Amount<A>
@@ -13,7 +13,7 @@ interface DefaultOptions<A extends string, E extends string> {
 
 interface GenerateUniqueEntityNumberOptions<A extends string, E extends string, N extends string>
   extends DefaultOptions<A, E> {
-  number: NumberString<N>
+  number: Alphanumeric<N>
   number_type: 'UEN'
 }
 

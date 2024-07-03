@@ -1,4 +1,5 @@
 export type { AdditionalConsumerData } from '@/types/additional_consumer_data'
+export type { Alphanumeric } from '@/types/alphanumeric'
 export type { Amount } from '@/types/amount'
 export type { CodeSpecification } from '@/types/code_parameter'
 export type { CountryCode } from '@/types/country_code'

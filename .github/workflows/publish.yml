@@ -1,7 +1,6 @@
 name: Publish
 
 on:
-  workflow_dispatch:
   workflow_run:
     workflows: CI
     branches: main
@@ -114,7 +113,7 @@ jobs:
           merge-multiple: true
 
       - name: Rename artifacts
-        run: | 
+        run: |
           mv sgqr-ubuntu.zip sgqr-linux.zip
           mv sgqr-macos.zip sgqr-linux-arm64.zip
 

@@ -1,5 +1,11 @@
 # sgqr
 
+## 0.8.2
+
+### Patch Changes
+
+- f6b3b1f: fix default export
+
 ## 0.8.1
 
 ### Patch Changes

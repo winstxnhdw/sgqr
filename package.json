@@ -42,7 +42,7 @@
     "@changesets/cli": "^2.27.7",
     "@types/qrcode": "^1.5.5",
     "@types/yargs": "^17.0.32",
-    "tsup": "8.2.3",
+    "tsup": "8.2.4",
     "typescript": "^5.5.4",
     "yargs": "^17.7.2"
   }

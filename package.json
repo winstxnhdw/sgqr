@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@types/bun": "^1.1.6",
-    "qrcode": "^1.5.3",
+    "qrcode": "^1.5.4",
     "tslib": "^2.6.3"
   },
   "devDependencies": {

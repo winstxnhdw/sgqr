@@ -33,7 +33,7 @@
     "test": "bun test --watch"
   },
   "dependencies": {
-    "@types/bun": "^1.1.18",
+    "@types/bun": "^1.2.0",
     "qrcode": "^1.5.4",
     "tslib": "^2.8.1"
   },

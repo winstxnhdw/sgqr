@@ -1,1 +1,1 @@
-export { getDaysFromNow } from '@/utils/getDaysFromNow'
+export { getDaysFromNow } from '@/utils/getDaysFromNow';

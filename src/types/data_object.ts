@@ -1,4 +1,4 @@
 export type DataObject = {
-  id: string
-  value: string
-}
+  id: string;
+  value: string;
+};

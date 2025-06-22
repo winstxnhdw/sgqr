@@ -60,10 +60,10 @@ type AlphanumericCharacter =
   | '6'
   | '7'
   | '8'
-  | '9'
+  | '9';
 
 export type Alphanumeric<T extends string, V = T> = T extends AlphanumericCharacter
   ? V
   : T extends `${AlphanumericCharacter}${infer R}`
     ? Alphanumeric<R, V>
-    : never
+    : never;

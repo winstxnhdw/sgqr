@@ -247,4 +247,4 @@ export type CountryCode =
   | 'YE'
   | 'ZM'
   | 'ZW'
-  | 'AX'
+  | 'AX';

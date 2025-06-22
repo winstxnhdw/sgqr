@@ -1,3 +1,3 @@
-import type { NumberString } from '@/types'
+import type { NumberString } from '@/types';
 
-export type ExpiryDate<E extends string> = NumberString<E> | '20380119'
+export type ExpiryDate<E extends string> = NumberString<E> | '20380119';

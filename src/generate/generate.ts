@@ -1,14 +1,14 @@
-import { crc16 } from '@/helpers'
+import { crc16 } from '@/helpers';
 import type {
   AdditionalConsumerData,
   CodeSpecification,
   DataObject,
   GenerateOptions,
   MerchantAccountInformation,
-} from '@/types'
+} from '@/types';
 
 function pad_all(data: readonly DataObject[]): string[] {
-  return data.map(({ id, value }) => `${id}${value.length.toString().padStart(2, '0')}${value}`)
+  return data.map(({ id, value }) => `${id}${value.length.toString().padStart(2, '0')}${value}`);
 }
 
 export function generate<A extends string, E extends string, N extends string>(
@@ -25,7 +25,7 @@ export function generate<A extends string, E extends string, N extends string>(
     merchant_city = 'Singapore',
     currency_code = '702',
     editable = false,
-  } = options
+  } = options;
 
   const merchant_account_information: MerchantAccountInformation<E, N> = [
     { id: '00', value: 'SG.PAYNOW' },
@@ -33,14 +33,14 @@ export function generate<A extends string, E extends string, N extends string>(
     { id: '02', value: number },
     { id: '03', value: editable ? '1' : '0' },
     { id: '04', value: expiry_date },
-  ]
+  ];
 
   const additional_consumer_data_request: AdditionalConsumerData = [
     {
       id: '01',
       value: comments,
     },
-  ]
+  ];
 
   const data: CodeSpecification<A> = [
     { id: '00', value: '01' },
@@ -53,17 +53,17 @@ export function generate<A extends string, E extends string, N extends string>(
     { id: '59', value: merchant_name },
     { id: '60', value: merchant_city },
     { id: '62', value: pad_all(additional_consumer_data_request).join('') },
-  ]
+  ];
 
-  const payload = pad_all(data)
-  payload.push('6304')
+  const payload = pad_all(data);
+  payload.push('6304');
 
-  const joined_parts = payload.join('')
-  const code = crc16(joined_parts)
+  const joined_parts = payload.join('');
+  const code = crc16(joined_parts);
 
   if (!code) {
-    return undefined
+    return undefined;
   }
 
-  return `${joined_parts}${code}`
+  return `${joined_parts}${code}`;
 }

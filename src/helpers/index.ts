@@ -1,1 +1,1 @@
-export { crc16 } from '@/helpers/crc16'
+export { crc16 } from '@/helpers/crc16';

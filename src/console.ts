@@ -1,7 +1,7 @@
-import { generate_code, generate_svg } from '@/generate'
-import type { ConsoleGenerateCodeOptions, GenerateCodeOptions, GenerateOptions } from '@/types'
-import yargs from 'yargs'
-import { hideBin } from 'yargs/helpers'
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+import { generate_code, generate_svg } from '@/generate';
+import type { ConsoleGenerateCodeOptions, GenerateCodeOptions, GenerateOptions } from '@/types';
 
 async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
   const args = await yargs(hideBin(Bun.argv))
@@ -60,24 +60,24 @@ async function parse_args(): Promise<ConsoleGenerateCodeOptions> {
       type: 'boolean',
     })
     .help()
-    .parse()
+    .parse();
 
-  return args as ConsoleGenerateCodeOptions
+  return args as ConsoleGenerateCodeOptions;
 }
 
 async function main() {
-  const options = await parse_args()
+  const options = await parse_args();
 
   const buffer =
     options.type === 'image/svg+xml'
       ? await generate_svg(options as GenerateOptions<string, string, string>)
-      : await generate_code(options as GenerateCodeOptions<string, string, string>)
+      : await generate_code(options as GenerateCodeOptions<string, string, string>);
 
   if (!buffer) {
-    throw new Error('Failed to generate the QR code!')
+    throw new Error('Failed to generate the QR code!');
   }
 
-  await Bun.write(options.output ?? Bun.stdout, buffer)
+  await Bun.write(options.output ?? Bun.stdout, buffer);
 }
 
-void main()
+void main();

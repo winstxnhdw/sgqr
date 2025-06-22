@@ -166,4 +166,4 @@ export type CurrencyCode =
   | '704'
   | '886'
   | '967'
-  | '932'
+  | '932';

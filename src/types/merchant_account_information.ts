@@ -1,28 +1,28 @@
-import type { Alphanumeric, DataObject, DialingCode, ExpiryDate, NumberString } from '@/types'
+import type { Alphanumeric, DataObject, DialingCode, ExpiryDate, NumberString } from '@/types';
 
 interface GloballyUniqueIdentifier extends DataObject {
-  id: '00'
-  value: string
+  id: '00';
+  value: string;
 }
 
 interface ProxyType extends DataObject {
-  id: '01'
-  value: '0' | '2'
+  id: '01';
+  value: '0' | '2';
 }
 
 interface ProxyValue<N extends string> extends DataObject {
-  id: '02'
-  value: Alphanumeric<N> | `+${DialingCode}${NumberString<N>}`
+  id: '02';
+  value: Alphanumeric<N> | `+${DialingCode}${NumberString<N>}`;
 }
 
 interface Editable extends DataObject {
-  id: '03'
-  value: '0' | '1'
+  id: '03';
+  value: '0' | '1';
 }
 
 interface ExpiryDateRecord<E extends string> extends DataObject {
-  id: '04'
-  value: ExpiryDate<E>
+  id: '04';
+  value: ExpiryDate<E>;
 }
 
 export type MerchantAccountInformation<E extends string, N extends string> = readonly [
@@ -31,4 +31,4 @@ export type MerchantAccountInformation<E extends string, N extends string> = rea
   ProxyValue<N>,
   Editable,
   ExpiryDateRecord<E>,
-]
+];

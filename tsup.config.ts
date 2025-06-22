@@ -1,4 +1,4 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from 'tsup';
 
 export default defineConfig((options) => {
   return {
@@ -11,5 +11,5 @@ export default defineConfig((options) => {
     treeshake: true,
     clean: true,
     dts: true,
-  }
-})
+  };
+});

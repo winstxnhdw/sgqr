@@ -43,7 +43,7 @@
     "@types/qrcode": "1.5.5",
     "@types/yargs": "17.0.33",
     "tsup": "8.5.0",
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "yargs": "18.0.0"
   }
 }

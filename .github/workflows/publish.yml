@@ -35,7 +35,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Create release PR or publish
-        uses: changesets/action@v1.6.0
+        uses: changesets/action@v1.7.0
         id: changesets
         with:
           title: 'build: bump version packages'

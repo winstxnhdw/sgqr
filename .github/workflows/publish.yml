@@ -107,7 +107,7 @@ jobs:
 
     steps:
       - name: Download Linux artifact
-        uses: actions/download-artifact@v8.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           pattern: artifact-*
           merge-multiple: true

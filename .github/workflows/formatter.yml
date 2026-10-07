@@ -14,4 +14,4 @@ permissions:
 
 jobs:
   format:
-    uses: winstxnhdw/actions/.github/workflows/format-biome.yml@f43de6b5804c7609cb6f13864e2d18a70301469e # main
+    uses: winstxnhdw/actions/.github/workflows/format-biome.yml@10339f0c31654e18c00d8c7256351ba78bcb2ef7 # main
